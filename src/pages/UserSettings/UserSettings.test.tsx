@@ -9,7 +9,7 @@ import { FactoryMapPin } from 'src/test/factories/MapPin'
 import { FactoryUser } from 'src/test/factories/User'
 import { testingThemeStyles } from 'src/test/utils/themeUtils'
 
-import { SettingsPage } from './SettingsPage'
+import { SettingsForm } from './SettingsForm'
 
 const Theme = testingThemeStyles
 

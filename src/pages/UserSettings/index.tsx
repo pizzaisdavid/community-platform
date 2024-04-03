@@ -3,7 +3,7 @@ import { observer } from 'mobx-react'
 import { useCommonStores } from 'src/common/hooks/useCommonStores'
 import { Flex, Text } from 'theme-ui'
 
-import { SettingsPage } from './SettingsPage'
+import { SettingsContainer } from './SettingsContainer'
 
 import type { IUser } from 'src/models/user.models'
 
@@ -12,7 +12,7 @@ const Settings = observer(() => {
 
   const currentUser = userStore.user as IUser
   return currentUser ? (
-    <SettingsPage />
+    <SettingsContainer />
   ) : (
     <Flex sx={{ justifyContent: 'center' }} mt="40px">
       <Text> You can only access the settings page if you are logged in</Text>

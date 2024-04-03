@@ -4,15 +4,14 @@ import { ARRAY_ERROR, FORM_ERROR } from 'final-form'
 import arrayMutators from 'final-form-arrays'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react'
-import { Button, ExternalLink, Loader, TextNotification } from 'oa-components'
-import { IModerationStatus } from 'oa-shared'
+import { Button, Loader, TextNotification } from 'oa-components'
 import { UnsavedChangesDialog } from 'src/common/Form/UnsavedChangesDialog'
 import { useCommonStores } from 'src/common/hooks/useCommonStores'
 import { isPreciousPlastic } from 'src/config/config'
 import { logger } from 'src/logger'
 import { isModuleSupported, MODULE } from 'src/modules'
 import { ProfileType } from 'src/modules/profile/types'
-import { Alert, Box, Card, Flex, Heading, Text } from 'theme-ui'
+import { Box, Card, Flex, Heading, Text } from 'theme-ui'
 import { v4 as uuid } from 'uuid'
 
 import { AccountSettingsSection } from './content/formSections/AccountSettings.section'
@@ -24,7 +23,6 @@ import { ImpactSection } from './content/formSections/Impact/Impact.section'
 import { PatreonIntegration } from './content/formSections/PatreonIntegration'
 import { PublicContactSection } from './content/formSections/PublicContact.section'
 import { SettingsErrors } from './content/formSections/SettingsErrors'
-import { SettingsMapPinSection } from './content/formSections/SettingsMapPinSection'
 import { UserInfosSection } from './content/formSections/UserInfos.section'
 import { WorkspaceSection } from './content/formSections/Workspace.section'
 import { ProfileGuidelines } from './content/PostingGuidelines'
@@ -49,55 +47,9 @@ interface IState {
   showFormSubmitResult: boolean
 }
 
-const MapPinModerationComments = (props: { mapPin: IMapPin | null }) => {
-  const { mapPin } = props
-  return mapPin?.comments &&
-    mapPin.moderation == IModerationStatus.IMPROVEMENTS_NEEDED ? (
-    <Alert variant="info" sx={{ mt: 3, fontSize: 2, textAlign: 'left' }}>
-      <Box>
-        This map pin has been marked as requiring further changes. Specifically
-        the moderator comments are:
-        <br />
-        <em>{mapPin?.comments}</em>
-      </Box>
-    </Alert>
-  ) : null
-}
-
-const WorskapceMapPinRequiredStars = () => {
-  const { description } = headings.workspace
-  const { themeStore } = useCommonStores().stores
-
-  return (
-    <Alert sx={{ fontSize: 2, textAlign: 'left', my: 2 }} variant="failure">
-      <Box>
-        <ExternalLink
-          href={themeStore?.currentTheme.styles.communityProgramURL}
-          sx={{ textDecoration: 'underline', color: 'currentcolor' }}
-        >
-          {description}
-        </ExternalLink>
-      </Box>
-    </Alert>
-  )
-}
-
-export const SettingsPage = observer((props: IProps) => {
+export const SettingsForm = observer((props: IProps) => {
   const { mapsStore, userStore } = useCommonStores().stores
   const [state, setState] = useState<IState>({} as any)
-
-  const toggleLocationDropdown = () => {
-    setState((prevState) => ({
-      ...prevState,
-      showLocationDropdown: !prevState.showLocationDropdown,
-      formValues: {
-        ...prevState.formValues,
-        mapPinDescription: '',
-        location: null,
-        country: null,
-      },
-    }))
-  }
 
   useEffect(() => {
     let user = userStore.user as IUserPP
@@ -206,7 +158,7 @@ export const SettingsPage = observer((props: IProps) => {
     return errors
   }
 
-  const { formValues, user, userMapPin } = state
+  const { formValues, user } = state
 
   return user ? (
     <Form
@@ -306,23 +258,6 @@ export const SettingsPage = observer((props: IProps) => {
                       mutators={form.mutators}
                       showLocationDropdown={state.showLocationDropdown}
                     />
-
-                    {!isMember && isModuleSupported(MODULE.MAP) && (
-                      <SettingsMapPinSection
-                        toggleLocationDropdown={toggleLocationDropdown}
-                      >
-                        <MapPinModerationComments mapPin={userMapPin} />
-                        <WorskapceMapPinRequiredStars />
-                      </SettingsMapPinSection>
-                    )}
-
-                    {isMember && isModuleSupported(MODULE.MAP) && (
-                      <SettingsMapPinSection
-                        toggleLocationDropdown={toggleLocationDropdown}
-                      >
-                        <MapPinModerationComments mapPin={userMapPin} />
-                      </SettingsMapPinSection>
-                    )}
                   </Flex>
 
                   {!isMember && isPreciousPlastic() && <ImpactSection />}

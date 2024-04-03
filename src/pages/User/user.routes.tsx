@@ -2,7 +2,7 @@ import { Route, Routes, useParams } from 'react-router-dom'
 
 import { AuthRoute } from '../common/AuthRoute'
 import { NotFoundPage } from '../NotFound/NotFound'
-import { SettingsPage } from '../UserSettings/SettingsPage'
+import { SettingsContainer } from '../UserSettings/SettingsContainer'
 import { UserProfile } from './content/UserProfile'
 
 const userRouteElements = (id) => (
@@ -13,7 +13,7 @@ const userRouteElements = (id) => (
       element={
         <AuthRoute roleRequired="admin">
           {' '}
-          <SettingsPage adminEditableUserId={id} />{' '}
+          <SettingsContainer adminEditableUserId={id} />{' '}
         </AuthRoute>
       }
     />
