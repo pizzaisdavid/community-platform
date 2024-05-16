@@ -22,7 +22,10 @@ const logger = winston.createLogger({
 })
 
 const isCi = process.argv.includes('ci')
+logger.debug('isCi: ' + isCi)
+
 const useProductionBuild = process.argv.includes('prod')
+logger.debug('useProductionBuild: ' + useProductionBuild)
 
 // Prevent unhandled errors being silently ignored
 process.on('unhandledRejection', (err) => {
