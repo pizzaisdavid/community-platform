@@ -47,13 +47,7 @@ process.on('unhandledRejection', (err) => {
  * Temp cli function to wipe hanging db: `firebase use ci; firebase firestore:delete --all-collections`
  */
 async function main() {
-  // copy endpoints for use in testing
-  logger.debug('copying started')
-  logger.debug('source: ' + PATHS.SRC_DB_ENDPOINTS)
-  logger.debug('destination: ' + PATHS.WORKSPACE_DB_ENDPOINTS)
-  fs.copyFileSync(PATHS.SRC_DB_ENDPOINTS, PATHS.WORKSPACE_DB_ENDPOINTS)
-  logger.debug('copying finished')
-
+  copyEndpoints()
   await startAppServer()
   runTests()
 }
@@ -63,6 +57,14 @@ main()
     console.error(err)
     process.exit(1)
   })
+
+function copyEndpoints() {
+    logger.debug('copying started')
+    logger.debug('source: ' + PATHS.SRC_DB_ENDPOINTS)
+    logger.debug('destination: ' + PATHS.WORKSPACE_DB_ENDPOINTS)
+    fs.copyFileSync(PATHS.SRC_DB_ENDPOINTS, PATHS.WORKSPACE_DB_ENDPOINTS)
+    logger.debug('copying finished')
+}
 
 function runTests() {
   console.log(isCi ? 'Start tests' : 'Opening cypress for manual testing')
