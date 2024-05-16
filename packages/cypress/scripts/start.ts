@@ -9,6 +9,18 @@ const e2eEnv = require('dotenv').config()
 import fs from 'fs-extra'
 import waitOn from 'wait-on'
 
+import * as winston from 'winston'
+
+const logger = winston.createLogger({
+  level: 'debug',
+  format: winston.format.combine(
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console()
+  ]
+})
+
 const isCi = process.argv.includes('ci')
 const useProductionBuild = process.argv.includes('prod')
 
@@ -33,7 +45,12 @@ process.on('unhandledRejection', (err) => {
  */
 async function main() {
   // copy endpoints for use in testing
+  logger.debug('copying started')
+  logger.debug('source: ' + PATHS.SRC_DB_ENDPOINTS)
+  logger.debug('destination: ' + PATHS.WORKSPACE_DB_ENDPOINTS)
   fs.copyFileSync(PATHS.SRC_DB_ENDPOINTS, PATHS.WORKSPACE_DB_ENDPOINTS)
+  logger.debug('copying finished')
+
   await startAppServer()
   runTests()
 }
