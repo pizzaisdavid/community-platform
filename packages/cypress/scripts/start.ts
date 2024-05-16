@@ -46,17 +46,18 @@ process.on('unhandledRejection', (err) => {
  * Possibly could be done with a Cypress.task or similar
  * Temp cli function to wipe hanging db: `firebase use ci; firebase firestore:delete --all-collections`
  */
-async function main() {
-  copyEndpoints()
-  await startAppServer()
-  runTests()
-}
 main()
   .then(() => process.exit(0))
   .catch((err) => {
     console.error(err)
     process.exit(1)
   })
+
+async function main() {
+  copyEndpoints()
+  await startAppServer()
+  runTests()
+}
 
 function copyEndpoints() {
     logger.debug('copying started')
