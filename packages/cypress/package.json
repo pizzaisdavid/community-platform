@@ -9,7 +9,8 @@
     "cypress": "13.6.6",
     "cypress-file-upload": "5.0.8",
     "firebase": "10.6.0",
-    "oa-shared": "workspace:*"
+    "oa-shared": "workspace:*",
+    "winston": "^3.13.0"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.16.1",
