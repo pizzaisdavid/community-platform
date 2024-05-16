@@ -24,8 +24,8 @@ const logger = winston.createLogger({
 const isCi = process.argv.includes('ci')
 logger.debug('isCi: ' + isCi)
 
-const useProductionBuild = process.argv.includes('prod')
-logger.debug('useProductionBuild: ' + useProductionBuild)
+const isProduction = process.argv.includes('prod')
+logger.debug('isProduction: ' + isProduction)
 
 // Prevent unhandled errors being silently ignored
 process.on('unhandledRejection', (err) => {
@@ -112,7 +112,7 @@ async function startAppServer() {
   let serverCmd = `${CROSSENV_BIN} ${crossEnvArgs} BROWSER=none PORT=3456 yarn start`
 
   // for production will instead serve from production build folder
-  if (useProductionBuild) {
+  if (isProduction) {
     // create local build if not running on ci (which will have build already generated)
     if (!isCi) {
       // specify CI=false to prevent throwing lint warnings as errors
