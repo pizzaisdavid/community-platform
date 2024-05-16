@@ -99,7 +99,6 @@ function runTests() {
  * There are npm packages like start-server-and-test but they seem to have flaky
  * performance in some environments (https://github.com/bahmutov/start-server-and-test/issues/250).
  * Instead manually track via child spawns
- *
  */
 async function startAppServer() {
   const { CROSSENV_BIN, BUILD_SERVE_JSON } = PATHS
