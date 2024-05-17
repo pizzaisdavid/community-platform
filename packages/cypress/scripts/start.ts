@@ -4,8 +4,6 @@ import { spawn, spawnSync } from 'child_process'
 import { generateAlphaNumeric } from '../src/utils/TestUtils'
 import PATHS from './paths'
 
-const e2eEnv = require('dotenv').config()
-
 import fs from 'fs-extra'
 import waitOn from 'wait-on'
 
@@ -20,6 +18,8 @@ const logger = winston.createLogger({
     new winston.transports.Console()
   ]
 })
+
+const e2eEnv = require('dotenv').config()
 
 const isCi = process.argv.includes('ci')
 logger.debug('isCi: ' + isCi)
