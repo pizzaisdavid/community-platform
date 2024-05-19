@@ -8,6 +8,10 @@
 #     everything must be restarted.
 #     TODO: make changes cause live-reload.
 #
+# Useful commands:
+#
+#   Stop all containers: `docker stop $(docker ps -a -q)`
+#
 ############################################################
 
 version: "2.1"

@@ -31,9 +31,9 @@
 #   4) Get the name of the container, with `docker ps`.
 #
 #   5) Run:
-#      `docker exec -it <name> bash`
+#      `docker exec -i -t <name> bash`
 #      Example:
-#        `docker exec -it community-platform-frontend-1 bash`
+#        `docker exec -i -t boring_noyce bash`
 #
 ############################################################
 
@@ -59,6 +59,10 @@ WORKDIR /usr/src/app
 # source: https://www.docker.com/blog/getting-started-with-docker-using-node-jspart-i/
 #
 ############################################################
+
+RUN apt-get update
+RUN apt-get -y install curl
+HEALTHCHECK CMD ["curl", "--fail", "http://localhost:3000"]
 
 COPY . ./
 
