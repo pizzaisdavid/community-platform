@@ -1,0 +1,52 @@
+
+############################################################
+#
+# 1) Have Docker Desktop running.
+#
+# 2) Build:
+#    docker build -f Dockerfile.frontend -t frontend .
+#
+# 3) Start:
+#    docker run -p 3000:3000 -i -t frontend
+#
+#    `-p 3000:3000` binds the port of the container
+#        to the port of the host.
+#
+#    `-i -t` enables the CTRL+C keyboard shortcut to
+#        stop the container.
+#        source: https://stackoverflow.com/a/41099052
+#
+# 4) Go to http://localhost:3000
+#
+############################################################
+
+FROM node:20.12.2-bullseye-slim
+
+WORKDIR /usr/src/app
+
+############################################################
+#
+# Ideally, installing dependencies would be done beforehand
+# to speed-up rebuilding but since some are `workspace:*`,
+# it seems not to work.
+#
+# So we are stuck with wait longer wait times.
+#
+# How these are typically setup:
+# COPY package.json ./
+# COPY yarn.lock ./
+# RUN yarn install
+#
+# COPY . ./
+#
+# source: https://www.docker.com/blog/getting-started-with-docker-using-node-jspart-i/
+#
+############################################################
+
+COPY . ./
+
+RUN yarn install
+
+EXPOSE 3000
+
+ENTRYPOINT [ "yarn", "start:platform" ]
