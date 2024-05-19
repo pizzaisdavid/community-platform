@@ -1,22 +1,39 @@
 
 ############################################################
 #
-# 1) Have Docker Desktop running.
+# How to use this container in a basic way:
 #
-# 2) Build:
-#    docker build -f Dockerfile.frontend -t frontend .
+#   1) Have Docker Desktop running.
 #
-# 3) Start:
-#    docker run -p 3000:3000 -i -t frontend
+#   2) Build:
+#      `docker build -f Dockerfile.frontend -t frontend .`
 #
-#    `-p 3000:3000` binds the port of the container
+#   3) Start:
+#      `docker run -p 3000:3000 -i -t frontend`
+#      Details:
+#        `-p 3000:3000` binds the port of the container
 #        to the port of the host.
-#
-#    `-i -t` enables the CTRL+C keyboard shortcut to
+#        `-i -t` enables the CTRL+C keyboard shortcut to
 #        stop the container.
 #        source: https://stackoverflow.com/a/41099052
 #
-# 4) Go to http://localhost:3000
+#   4) Go to http://localhost:3000
+#
+#
+# How to debug:
+#
+#   1) Have Docker Desktop running.
+#
+#   2) Have the container running.
+#
+#   3) Open a new terminal.
+#
+#   4) Get the name of the container, with `docker ps`.
+#
+#   5) Run:
+#      `docker exec -it <name> bash`
+#      Example:
+#        `docker exec -it community-platform-frontend-1 bash`
 #
 ############################################################
 
