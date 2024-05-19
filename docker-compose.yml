@@ -1,0 +1,21 @@
+
+############################################################
+#
+# This file supports the following use-case:
+# - local development
+#     `docker-compose --file ./docker-compose.yml up frontend --build`
+#     The React frontend is built but for each change
+#     everything must be restarted.
+#     TODO: make changes cause live-reload.
+#
+############################################################
+
+version: "2.1"
+services:
+
+  frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile.frontend
+    ports:
+    - "3000:3000"
