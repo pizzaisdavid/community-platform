@@ -37,6 +37,7 @@
     "format:code": "eslint . --ext .js,.jsx,.ts,.tsx src --color --fix",
     "format:style": "prettier --write '**/*.{md,json,js,tsx,ts}'",
     "serve": "npx serve -s build",
+    "test:e2e:docker": "docker-compose --file ./docker-compose.yml up --build --abort-on-container-exit && docker-compose --file ./docker-compose.yml down",
     "test": "yarn workspace oa-cypress start",
     "test:components": "yarn workspace oa-components test-ci",
     "test:unit": "yarn build:themes && yarn build:components && env-cmd -e cra craco test --env=jsdom --runInBand --logHeapUsage --coverage --reporters=default --reporters=jest-junit",

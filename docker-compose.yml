@@ -23,3 +23,17 @@ services:
       dockerfile: Dockerfile.frontend
     ports:
     - "3000:3000"
+
+  e2e-test-runner:
+    # https://www.cypress.io/blog/2019/05/02/run-cypress-with-a-single-docker-command
+    image: cypress/included:13.6.6
+    depends_on:
+      frontend:
+        condition: service_healthy
+    environment:
+    - CYPRESS_baseUrl=http://frontend:3000
+    working_dir: /e2e
+    volumes:
+    - ./packages/cypress:/e2e
+    links:
+    - frontend
