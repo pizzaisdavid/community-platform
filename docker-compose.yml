@@ -32,8 +32,8 @@ services:
         condition: service_healthy
     environment:
     - CYPRESS_baseUrl=http://frontend:3000
-    working_dir: /e2e
+    working_dir: /e2e/packages/cypress
     volumes:
-    - ./packages/cypress:/e2e
+    - ./:/e2e
     links:
     - frontend

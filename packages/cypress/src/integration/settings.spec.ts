@@ -1,4 +1,4 @@
-import { ExternalLinkLabel } from 'oa-shared'
+import { ExternalLinkLabel } from './../../../../shared'
 
 import { form } from '../../../../src/pages/UserSettings/labels'
 import { SingaporeStubResponse } from '../fixtures/searchResults'

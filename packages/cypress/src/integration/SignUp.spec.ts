@@ -1,4 +1,4 @@
-import { FRIENDLY_MESSAGES } from 'oa-shared'
+import { FRIENDLY_MESSAGES } from './../../../../shared'
 
 import { generateNewUserDetails } from '../utils/TestUtils'
 

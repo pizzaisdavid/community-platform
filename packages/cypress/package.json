@@ -1,6 +1,7 @@
 {
   "name": "oa-cypress",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "start": "ts-node scripts/start.ts"
   },
@@ -9,7 +10,6 @@
     "cypress": "13.6.6",
     "cypress-file-upload": "5.0.8",
     "firebase": "10.6.0",
-    "oa-shared": "workspace:*",
     "winston": "^3.13.0"
   },
   "devDependencies": {
@@ -19,7 +19,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
-    "ts-node": "^10.2.1",
+    "typescript": "^5.4.5",
     "wait-on": "^7.0.1"
   },
   "installConfig": {

@@ -1,5 +1,5 @@
 /**
- * Simple re-export of all the data within the oa-shared mocks
+ * Simple re-export of all the data within the shared mocks
  * Can be imported locally as individual namespaces or combined
  * @example
  * ```
@@ -12,7 +12,7 @@
  *
  **/
 
-import * as allData from 'oa-shared/mocks/data'
+import * as allData from './../../../../shared/mocks/data'
 
 export const MOCK_DATA = {
   ...allData,

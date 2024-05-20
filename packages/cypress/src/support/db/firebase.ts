@@ -7,7 +7,7 @@ import 'firebase/compat/storage'
 import 'firebase/compat/functions'
 import 'firebase/compat/database'
 
-import { DB_ENDPOINTS } from 'oa-shared/models'
+import { DB_ENDPOINTS } from './../../../../../shared/models'
 
 import { MOCK_DATA } from '../../data/index'
 

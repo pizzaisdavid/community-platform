@@ -1,4 +1,3 @@
-#!/usr/bin/env ts-node
 import { spawn, spawnSync } from 'child_process'
 
 import { generateAlphaNumeric } from '../src/utils/TestUtils'

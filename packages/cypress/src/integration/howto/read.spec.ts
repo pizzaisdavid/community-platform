@@ -1,4 +1,4 @@
-import { DifficultyLevel } from 'oa-shared'
+import { DifficultyLevel } from './../../../../../shared'
 
 // import { MOCK_DATA } from '../../data'
 
