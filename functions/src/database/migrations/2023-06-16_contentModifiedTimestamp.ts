@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
-import { DB_ENDPOINTS } from '../models'
-import { db } from '../Firebase/firestoreDB'
+import { DB_ENDPOINTS } from '../../models'
+import { db } from '../../Firebase/firestoreDB'
 
 let batch = db.batch()
 const BATCH_SIZE = 200
@@ -11,7 +11,7 @@ const operations = { updated: [], skipped: [] }
  * One-off script to set contentModifiedTimestamp for all docs
  * Once run this code will be deprecated, but retained for future reference
  */
-export const contentModifiedTimestamp = functions
+export const _2023_06_16_contentModifiedTimestamp = functions
   .runWith({ memory: '512MB' })
   .https.onCall(async (dryRun: boolean, context) => {
     if (!context.auth) {
