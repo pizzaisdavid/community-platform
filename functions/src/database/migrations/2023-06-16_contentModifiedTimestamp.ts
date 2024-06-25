@@ -9,7 +9,7 @@ const operations = { updated: [], skipped: [] }
 
 /**
  * One-off script to set contentModifiedTimestamp for all docs
- * Once run this code will be deprecated, but retained for future reference
+ * Once this code is ran, it will be deprecated but retained for future reference
  */
 export const _2023_06_16_contentModifiedTimestamp = functions
   .runWith({ memory: '512MB' })
