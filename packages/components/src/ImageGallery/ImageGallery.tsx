@@ -34,6 +34,7 @@ interface IState {
   activeImageIndex: number
   showLightbox: boolean
   images: Array<IImageGalleryItem>
+  spinners: boolean[]
 }
 
 const ThumbCard = styled<CardProps & React.ComponentProps<any>>(Box)`
@@ -61,15 +62,23 @@ export const ImageGallery = (props: ImageGalleryProps) => {
     activeImageIndex: 0,
     showLightbox: false,
     images: [],
+    spinners: [],
   })
   const lightbox = useRef<PhotoSwipeLightbox>()
 
   useEffect(() => {
     const images = (props.images || []).filter((img) => img !== null)
+
+    let spinners = []
+    for (let i = 0; i < images.length; i++) {
+      spinners.push(false)
+    }
+
     setState((state) => ({
       ...state,
       activeImageIndex: 0,
       images: images,
+      spinners: spinners,
     }))
 
     // Initializes the Photoswipe lightbox to use the provided images
@@ -133,6 +142,16 @@ export const ImageGallery = (props: ImageGalleryProps) => {
     <Flex sx={{ flexDirection: 'column' }}>
       <Flex sx={{ width: '100%', position: 'relative' }}>
         <ThemeImage
+          onLoad={() => {
+            console.log('onLoad')
+            console.log(activeImage.downloadUrl)
+            const tempSpinners = state.spinners
+            tempSpinners[activeImageIndex] = false
+            setState({
+              ...state,
+              spinners: tempSpinners,
+            })
+          }}
           loading="lazy"
           data-cy="active-image"
           data-testid="active-image"
@@ -192,12 +211,15 @@ export const ImageGallery = (props: ImageGalleryProps) => {
           </>
         ) : null}
       </Flex>
+      {
+        state.spinners[activeImageIndex] === true && <div>I'm a reactangle</div>
+      }
       {showThumbnails ? (
         <Flex sx={{ width: '100%', flexWrap: 'wrap' }} mx={[2, 2, '-5px']}>
           {images.map((image, index: number) => (
             <ThumbCard
-              data-cy="thumbnail"
-              data-testid="thumbnail"
+              data-cy="dsfsfsdfs"
+              data-testid="dsfsfsdfs"
               mb={3}
               mt={4}
               opacity={image === activeImage ? 1.0 : 0.5}
